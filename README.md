@@ -1,5 +1,5 @@
-# gh-projects-importer
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+# gh-project-importer
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://github.com/joao-asp/gh-project-importer?tab=AGPL-3.0-1-ov-file)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 [English](#english) | [Português (Brasil)](#português-brasil)
@@ -22,8 +22,8 @@ I wrote this tool to solve a personal bottleneck: manual data entry. Managing mu
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/YOUR_USER/gh-projects-importer.git](https://github.com/YOUR_USER/gh-projects-importer.git)
-cd gh-projects-importer
+git clone [https://github.com/joao-asp/gh-project-importer.git](https://github.com/joao-asp/gh-project-importer.git)
+cd gh-project-importer
 
 ```
 
@@ -39,11 +39,8 @@ pip install -r requirements.txt
 ```env
 GITHUB_TOKEN=your_personal_access_token
 GITHUB_ORGANIZATION=your_username_or_organization_name
-PROJECT_NUMBER=1
 
 ```
-
-*(The `PROJECT_NUMBER` is the integer found in your GitHub Project URL).*
 
 ### Usage
 
@@ -53,11 +50,22 @@ Your Markdown file must follow a strict syntax to be parsed correctly. Each task
 `- [ ] Task Title | Brief description of the task.`
 
 **Run the CLI:**
+You can pass the project number directly using the `-p` or `--project` flag:
 
 ```bash
-python importador.py --file path/to/your/tasks.md
+python importador.py -f path/to/your/tasks.md -p 1
 
 ```
+
+If you don't pass the project number, the CLI will interactively prompt you for it:
+
+```bash
+python importador.py -f path/to/your/tasks.md
+# Prompt: Qual é o número do projeto no GitHub? (Ex: 1, 2): 
+
+```
+
+*(The project number is the integer found at the end of your GitHub Project URL).*
 
 ### AI Prompt Template (Optional)
 
@@ -77,7 +85,7 @@ If you use LLMs to break down your project scopes, use the following strict prom
 
 ### License
 
-This project is licensed under the [GNU AGPLv3](https://www.google.com/search?q=LICENSE).
+This project is licensed under the [GNU AGPLv3](https://github.com/joao-asp/gh-project-importer?tab=AGPL-3.0-1-ov-file).
 
 ---
 
@@ -99,8 +107,8 @@ Escrevi esta ferramenta para resolver um gargalo pessoal: a entrada manual de da
 1. Clone o repositório:
 
 ```bash
-git clone [https://github.com/SEU_USUARIO/gh-projects-importer.git](https://github.com/SEU_USUARIO/gh-projects-importer.git)
-cd gh-projects-importer
+git clone [https://github.com/joao-asp/gh-project-importer.git](https://github.com/joao-asp/gh-project-importer.git)
+cd gh-project-importer
 
 ```
 
@@ -116,11 +124,8 @@ pip install -r requirements.txt
 ```env
 GITHUB_TOKEN=seu_personal_access_token
 GITHUB_ORGANIZATION=seu_usuario_ou_nome_da_organizacao
-PROJECT_NUMBER=1
 
 ```
-
-*(O `PROJECT_NUMBER` é o número inteiro encontrado na URL do seu GitHub Project).*
 
 ### Como usar
 
@@ -130,11 +135,22 @@ Seu arquivo Markdown deve seguir uma sintaxe estrita para ser processado correta
 `- [ ] Título da Tarefa | Breve descrição da tarefa.`
 
 **Execute o CLI:**
+Você pode passar o número do projeto diretamente usando a flag `-p` ou `--project`:
 
 ```bash
-python importador.py --file caminho/para/suas/tarefas.md
+python importador.py -f caminho/para/suas/tarefas.md -p 1
 
 ```
+
+Se você não informar o número do projeto, o CLI perguntará interativamente no terminal:
+
+```bash
+python importador.py -f caminho/para/suas/tarefas.md
+# Prompt: Qual é o número do projeto no GitHub? (Ex: 1, 2): 
+
+```
+
+*(O número do projeto é o número inteiro encontrado no final da URL do seu GitHub Project).*
 
 ### Modelo de Prompt para IA (Opcional)
 
@@ -154,4 +170,4 @@ Se você usa LLMs para quebrar o escopo dos seus projetos, utilize o prompt rest
 
 ### Licença
 
-Este projeto é licenciado sob a [GNU AGPLv3](https://www.google.com/search?q=LICENSE).
+Este projeto é licenciado sob a [GNU AGPLv3](https://github.com/joao-asp/gh-project-importer?tab=AGPL-3.0-1-ov-file).
