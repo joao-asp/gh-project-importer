@@ -92,10 +92,11 @@ def adicionar_draft_item(project_id: str, titulo: str, descricao: str):
 @app.command()
 def importar(
     arquivo: str = typer.Option(..., "--file", "-f", help="Caminho do arquivo Markdown com as tarefas."),
+    projeto: int = typer.Option(..., "--project", "-p", prompt="Qual é o número do projeto no GitHub? (Ex: 1, 2)", help="Número sequencial do GitHub Project V2.")
 ):
     """Lê tarefas de um arquivo Markdown padronizado e as importa no GitHub Projects V2."""
-    if not all([GITHUB_TOKEN, GITHUB_ORG, PROJECT_NUMBER]):
-        typer.secho("Erro: Verifique se GITHUB_TOKEN, GITHUB_ORGANIZATION e PROJECT_NUMBER estão no seu .env", fg=typer.colors.RED)
+    if not all([GITHUB_TOKEN, GITHUB_ORG]):
+        typer.secho("Erro: Verifique se GITHUB_TOKEN e GITHUB_ORGANIZATION estão no seu .env", fg=typer.colors.RED)
         raise typer.Exit(1)
 
     if not os.path.exists(arquivo):
@@ -124,10 +125,10 @@ def importar(
 
     typer.secho(f"Encontradas {len(tarefas)} tarefas prontas para importação.", fg=typer.colors.GREEN)
 
-    # 2. Resgatar o Project ID do GitHub via GraphQL
+    # 2. Resgatar o Project ID do GitHub via GraphQL (usando a variável 'projeto' passada no terminal)
     try:
-        typer.echo("Conectando ao GitHub para buscar metadados do projeto...")
-        project_id = buscar_project_id(GITHUB_ORG, PROJECT_NUMBER)
+        typer.echo(f"Conectando ao GitHub para buscar metadados do projeto {projeto}...")
+        project_id = buscar_project_id(GITHUB_ORG, projeto)
         typer.secho(f"Projeto localizado com sucesso! ID: {project_id}", fg=typer.colors.CYAN)
     except Exception as e:
         typer.secho(f"Erro de autenticação ou localização: {e}", fg=typer.colors.RED)
@@ -142,7 +143,3 @@ def importar(
                 typer.secho(f"\nFalha ao importar '{tarefa['titulo']}': {e}", fg=typer.colors.RED)
 
     typer.secho("\n🚀 Importação concluída com sucesso!", fg=typer.colors.GREEN, bold=True)
-
-
-if __name__ == "__main__":
-    app()
